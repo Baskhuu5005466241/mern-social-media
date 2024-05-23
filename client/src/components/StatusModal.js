@@ -42,6 +42,8 @@ const StatusModal = () => {
     setImages(newArr);
   };
 
+
+  // I CHANGED HANDLESTREAM
   const handleStream = () => {
     setStream(true);
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -50,13 +52,13 @@ const StatusModal = () => {
         .then((mediaStream) => {
           videoRef.current.srcObject = mediaStream;
           videoRef.current.play();
-          const track = mediaStream.getTracks();
-          setTracks(track[0]);
+          const tracks = mediaStream.getTracks();
+          setTracks(tracks[0]); // Set the MediaStreamTrack object
         })
         .catch((err) => console.log(err));
     }
   };
-
+  
   const handleCapture = () => {
     const width = videoRef.current.clientWidth;
     const height = videoRef.current.clientHeight;

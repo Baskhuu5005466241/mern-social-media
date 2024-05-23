@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPost } from '../../redux/actions/postAction';
 import LoadIcon from '../../images/loading.gif';
 import PostCard from "../../components/PostCard";
+import SinglePostCard from '../../components/SinglePostCard';
 
 const Post = () => {
     const { id } = useParams();
@@ -20,7 +21,7 @@ const Post = () => {
     }, [detailPost, dispatch, id, auth]);
 
     return (
-        <div className="posts">
+        <div className="posts lol">
             {
                 post.length === 0 &&
                 <img src={LoadIcon} alt="Loading..." className="d-block mx-auto my-4" />
@@ -28,7 +29,7 @@ const Post = () => {
 
             {
                 post.map(item => (
-                    <PostCard post={item} key={item._id} />
+                    <SinglePostCard post={item} key={item._id} />
                 ))
             }
         </div>

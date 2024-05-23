@@ -5,6 +5,7 @@ import { logout } from "../../redux/actions/authAction";
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import Avatar from "../Avatar";
 import NotifyModal from "../NotifyModal";
+import UserCard from "../UserCard";
 
 const Menu = () => {
   const navLinks = [
@@ -26,85 +27,26 @@ const Menu = () => {
       <ul className="navbar-nav flex-row mb-2 mb-lg-0">
         {navLinks.map((link, index) => (
           <li className={`nav-item px-2 ${isActive(link.path)}`} key={index}>
-            <Link className={`nav-link `} to={link.path}>
+            <Link className={`nav-link text-black` } to={link.path}>
               <span className={`material-icons `}>{link.icon}</span>
             </Link>
           </li>
         ))}
-
-        <li className="nav-item dropdown" style={{ opacity: "1" }}>
-          <span
-            className="nav-link position-relative"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <span
-              style={{ color: notify.data.length > 0 ? "var(--c1)" : "" }}
-              className={`material-icons `}
-            >
-              notifications
-            </span>
-            <span className="notify_length">{notify.data.length}</span>
-          </span>
-
-          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <NotifyModal />
-          </div>
-        </li>
-
-        <li className="nav-item dropdown" style={{ opacity: "1" }}>
-          <span
-            className="nav-link dropdown-toggle"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <Avatar src={auth.user.avatar} size="medium-avatar" />
-          </span>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <Link
-                style={{ color: "white" }}
-                className="dropdown-item"
-                to={`/profile/${auth.user._id}`}
-              >
-                Profile
-              </Link>
-            </li>
-            <li>
-              <label
-                style={{ color: "white" }}
-                htmlFor="theme"
-                className="dropdown-item"
-                onClick={() =>
-                  dispatch({ type: GLOBALTYPES.THEME, payload: !theme })
-                }
-              >
-                {theme ? "Light mode" : "Dark mode"}
-              </label>
-            </li>
-            <li>
-              <hr className="dropdown-divider" />
-            </li>
-
-            <li>
-              <Link
-                style={{ color: "white" }}
-                className="dropdown-item"
-                to="/"
-                onClick={() => dispatch(logout())}
-              >
-                Logout
-              </Link>
-            </li>
-          </ul>
-        </li>
+        
       </ul>
     </div>
   );
 };
 
 export default Menu;
+
+
+
+
+
+
+
+
+
+
+

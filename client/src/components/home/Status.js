@@ -1,22 +1,25 @@
-import React from 'react'
-import Avatar from '../Avatar';
-import { useSelector,useDispatch } from "react-redux";
-import { GLOBALTYPES } from '../../redux/actions/globalTypes'
+import React from 'react';
+import Avatar from "../Avatar";
+import { useSelector, useDispatch } from "react-redux";
+import { GLOBALTYPES } from '../../redux/actions/globalTypes';
+import { Link } from 'react-router-dom';
 
 const Status = () => {
     const { auth } = useSelector(state => state);
     const dispatch = useDispatch();
     return (
       <div className="status my-3 d-flex">
-        <div className="outer-shadow big-avatar-cover">
+        {/* Wrapped Avatar component with Link */}
+        <Link to={`/profile/${auth.user._id}`} className="outer-shadow big-avatar-cover">
           <Avatar src={auth.user.avatar} size="big-avatar" className="" />
-        </div>
+        </Link>
         <button
           onClick={() => dispatch({ type: GLOBALTYPES.STATUS, payload: true })}
           className="btn-1 outer-shadow hover-in-shadow statusBtn flex-fill "
           style={{ marginLeft: "7px" }}
         >
-          <span style={{ textShadow: "var(--outer-shadow)" }}>
+          {/* Username without Link */}
+          <span style={{ textShadow: "var(--outer-shadow)", color:"black" }}>
             {auth.user.username}, What's on your mind?
           </span>
         </button>
@@ -24,4 +27,4 @@ const Status = () => {
     );
 }
 
-export default Status
+export default Status;

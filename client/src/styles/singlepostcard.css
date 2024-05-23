@@ -1,0 +1,42 @@
+.d-flex {
+    display: flex;
+  }
+  
+  .justify-content-center {
+    justify-content: center;
+  }
+  
+  .align-items-start {
+    align-items: flex-start;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comments-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  .comments-container > div {
+    flex: 1;
+  }
+  
+
+  .post-card {
+    border: 1px solid #dbdbdb;
+    margin-bottom: 60px;
+  }
+  
+  .comments-container {
+    padding: 16px;
+    border-top: 1px solid #dbdbdb;
+  }
+  
+  /* Add styling for CardHeader, CardBody, CardFooter, and their child components */
+  

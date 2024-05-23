@@ -52,21 +52,21 @@ const Sidebar = () => {
             <i className="fa fa-ban"></i>
             <a href="#">Spams Management</a>
           </div>
-          <div
+          {/* <div
             className={`sidebar__link ${adminMenu === 4 && "active_menu_link"}`}
             onClick={() => setAdminMenu(4)}
           >
             <i className="fa fa-wrench"></i>
             <a href="#">Users Management</a>
-          </div>
-          <div className="sidebar__link">
+          </div> */}
+          {/* <div className="sidebar__link">
             <i className="fa fa-archive"></i>
             <a href="#">xyz</a>
           </div>
           <div className="sidebar__link">
             <i className="fa fa-handshake-o"></i>
             <a href="#">xyz</a>
-          </div>
+          </div> */}
 
           <div className="sidebar__logout">
             <i className="fa fa-power-off"></i>

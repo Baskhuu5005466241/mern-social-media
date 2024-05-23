@@ -34,7 +34,6 @@ const Posts = ({ auth, profile, dispatch, id }) => {
   return (
     <div>
       <PostThumb posts={posts} result={result} />
-
       {load && (
         <img src={LoadIcon} alt="Loading..." className="d-block mx-auto" />
       )}

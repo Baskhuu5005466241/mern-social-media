@@ -20,11 +20,21 @@ const Saved = ({ auth, dispatch }) => {
         setLoad(false)
     })  
     .catch(err => {
-        dispatch({type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg}})
-    })
+        if (err.response && err.response.data && err.response.data.msg) {
+            // Handle error response from the API
+            dispatch({type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg}})
+        } else {
+            // Handle unexpected error
+            console.error("Unhandled error:", err);
+            // You might want to dispatch a generic error message or log the error for debugging
+        }
+        setLoad(false); // Ensure load state is set to false even in case of error
+    });
 
+    // Cleanup function
     return () => setSavePosts([]);
-  }, [dispatch, auth.token]);
+}, [dispatch, auth.token]);
+
 
   const handleLoadMore = async () => {
     setLoad(true);

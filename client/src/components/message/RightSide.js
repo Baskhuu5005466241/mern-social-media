@@ -145,7 +145,7 @@ const RightSide = () => {
         <div className="message_header">
           {user.length !== 0 && (
             <UserCard user={user}>
-              <i className="fas fa-trash text-danger" />
+              {/* <i className="fas fa-trash text-danger" style={{marginLeft:"30px"}} /> */}
             </UserCard>
           )}
         </div>

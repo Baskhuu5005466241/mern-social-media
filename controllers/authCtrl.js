@@ -54,12 +54,10 @@ const authCtrl = {
           password: "",
         },
       });
-
+      
       await newUser.save();
-
-      res.json({ msg: "registered" });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
     }
   },
 

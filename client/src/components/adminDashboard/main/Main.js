@@ -94,7 +94,7 @@ const Main = () => {
             </div>
           </div>
 
-          <div className="card_admin">
+          {/* <div className="card_admin">
             <i
               className="fa fa-check-circle fa-2x  text-green"
               aria-hidden="true"
@@ -105,7 +105,7 @@ const Main = () => {
                 {admin.total_active_users}
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
         {/* <!-- MAIN CARDS ENDS HERE --> */}
 

@@ -1,10 +1,16 @@
 import React from 'react'
 import LeftSide from '../../components/message/LeftSide'
+// import LeftMenu from '../../components/header/LeftMenu';
 
 const Message = () => {
     return (
       <div className="message d-flex">
-        <div className="col-md-4 px-0" style={{borderRight: '1px solid #ddd'}}>
+        
+        {/* <div className="col-md-2 px-4" style={{ borderRight: "1px solid #ddd" }}>
+          <LeftMenu />
+        </div> */}
+
+        <div className="col-md-3 px-0" style={{borderRight: '1px solid #ddd'}}>
           <LeftSide />
         </div>
 

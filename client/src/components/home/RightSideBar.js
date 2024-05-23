@@ -15,7 +15,7 @@ const RightSideBar = () => {
 
 
     return (
-      <div className="my-4">
+      <div className="my-3 position-fixed ">
         <div className="inner-shadow" style={{ borderRadius: "5px" }}>
           <UserCard user={auth.user} />
         </div>

@@ -5,6 +5,7 @@ import { changePassword } from "../../redux/actions/authAction";
 
 import { checkImage } from "../../utils/imageUpload";
 
+
 const ChangePassword = ({ setChangePassword }) => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");

@@ -72,16 +72,16 @@
   color: var(--c1);
 }
 .color-c2{
-  color: var(--c2);
+  color: black;
 }
 .color-c3{
-  color: var(--c3);
+  color: rgb(19, 238, 11);
 }
 .color-pink{
   color: var(--pink);
 }
 .color-violet{
-  color: var(--violet);
+  color: black;
 }
 .color-blue{
   color: var(--blue);

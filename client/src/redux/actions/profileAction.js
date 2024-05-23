@@ -14,29 +14,28 @@ export const PROFILE_TYPES = {
 
 };
 
+// I CHANGED GETPROFILEUSERS
+export const getProfileUsers = ({ id, auth }) => async (dispatch) => {
+  dispatch({ type: PROFILE_TYPES.GET_ID, payload: id });
 
-export const getProfileUsers = ({ id, auth}) => async (dispatch) => {
+  try {
+    dispatch({ type: PROFILE_TYPES.LOADING, payload: true });
 
-  dispatch({type:PROFILE_TYPES.GET_ID, payload: id})
+    const res = await getDataAPI(`/user/${id}`, auth.token);
+    const res1 = await getDataAPI(`/user_posts/${id}`, auth.token);
 
-    try {
-      dispatch({type: PROFILE_TYPES.LOADING, payload:true});
-      const res =  getDataAPI(`/user/${id}`, auth.token);
-      
-      const res1 =  getDataAPI(`/user_posts/${id}`, auth.token);
+    const users = res.data;
+    const posts = res1.data;
 
-      const users = await res;
-      const posts = await res1;
+    dispatch({ type: PROFILE_TYPES.GET_USER, payload: users });
+    dispatch({ type: PROFILE_TYPES.GET_POSTS, payload: { ...posts, _id: id, page: 2 } });
 
-      dispatch({ type: PROFILE_TYPES.GET_USER, payload: users.data });
-      dispatch({ type: PROFILE_TYPES.GET_POSTS, payload: {...posts.data, _id: id, page: 2} });
-
-      dispatch({ type: PROFILE_TYPES.LOADING, payload: false });
-      
-    } catch (err) {
-      dispatch({ type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg} });
-    }
+    dispatch({ type: PROFILE_TYPES.LOADING, payload: false });
+  } catch (err) {
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } });
   }
+};
+
 
 
 
@@ -58,20 +57,20 @@ export const updateProfileUser = ({userData, avatar, auth}) => async (dispatch) 
       payload: { error: "Story is too long." },
     });
   }
-
+  // I CHANGED FROM HERE
   try {
     let media;
     dispatch({
       type: GLOBALTYPES.ALERT,
       payload: { loading: true }
     });
-
-    if(avatar){
+  
+    if (avatar) {
       media = await imageUpload([avatar]);
     }
-
+  
     const res = await patchDataAPI("user", { ...userData, avatar: avatar ? media[0].url : auth.user.avatar }, auth.token);
-
+  
     dispatch({
       type: GLOBALTYPES.AUTH,
       payload: {
@@ -88,15 +87,20 @@ export const updateProfileUser = ({userData, avatar, auth}) => async (dispatch) 
       type: GLOBALTYPES.ALERT,
       payload: { success: res.data.msg },
     });
-
   } catch (err) {
-    dispatch({
-      type: GLOBALTYPES.ALERT,
-      payload: { error: err.response.data.msg },
-    });
+    if (err.response && err.response.data && err.response.data.msg) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: err.response.data.msg },
+      });
+    } else {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "An error occurred while updating profile." },
+      });
+    }
   }
-
-};
+};  
 
 export const follow = ({ users, user, auth, socket }) => async (dispatch) => {
   let newUser;

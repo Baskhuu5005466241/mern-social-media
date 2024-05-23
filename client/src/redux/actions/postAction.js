@@ -15,61 +15,63 @@ export const POST_TYPES = {
   SAVE_POST: "SAVE_POST",
 };
 
-export const createPost = ({content, images, auth, socket}) => async dispatch => {
+export const createPost = ({ content, images, auth, socket }) => async (dispatch) => {
+  try {
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
+
     let media = [];
-
-    try {
-        dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} });
-
-        if(images.length > 0){ media = await imageUpload(images)}
-
-        const res = await postDataAPI('posts', {content, images: media}, auth.token );
-
-        
-        dispatch({ type: POST_TYPES.CREATE_POST , payload: {...res.data.newPost, user: auth.user} });
-        
-        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } });
-        
-
-        // todo notification
-        const msg = {
-          id: res.data.newPost._id,
-          text: "Added a new post.",
-          recipients: res.data.newPost.user.followers,
-          url: `/post/${res.data.newPost._id}`,
-          content, 
-          image: media[0].url
-        };
-
-        dispatch(createNotify({msg, auth, socket}));
-
-    } catch (err) {
-        dispatch({
-            type: GLOBALTYPES.ALERT,
-            payload: {
-                error: err.response.data.msg
-            }
-        })
+    if (images.length > 0) {
+      media = await imageUpload(images);
     }
-}
+
+    const res = await postDataAPI('posts', { content, images: media }, auth.token);
+
+    // Notification
+    const msg = {
+      id: res.data.newPost._id,
+      text: "Added a new post.",
+      recipients: res.data.newPost.user.followers,
+      url: `/post/${res.data.newPost._id}`,
+      content,
+      image: media[0]?.url || '',
+    };
+
+    dispatch(createNotify({ msg, auth, socket }));
+
+    dispatch({
+      type: POST_TYPES.CREATE_POST,
+      payload: { ...res.data.newPost, user: auth.user },
+    });
+
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: "Post created successfully" } });
+
+  } catch (err) {
+    dispatch({
+      type: GLOBALTYPES.ALERT,
+      payload: { error: err.response?.data?.msg || "Failed to create post" },
+    });
+  } finally {
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } });
+  }
+};
 
 
-export const getPosts = (token) => async dispatch => {
-    try {
-        dispatch({ type: POST_TYPES.LOADING_POST, payload: true  });
-        const res = await getDataAPI('posts', token);
-        dispatch({ type: POST_TYPES.GET_POSTS, payload: {...res.data, page: 2} });
+export const getPosts = (token) => async (dispatch) => {
+  try {
+    dispatch({ type: POST_TYPES.LOADING_POST, payload: true });
+    const res = await getDataAPI('posts', token);
+    dispatch({ type: POST_TYPES.GET_POSTS, payload: { ...res.data, page: 2 } });
+  } catch (err) {
+    const errorMessage = err.response?.data?.msg || err.message || "Something went wrong.";
+    dispatch({
+      type: GLOBALTYPES.ALERT,
+      payload: { error: errorMessage },
+    });
+  } finally {
+    dispatch({ type: POST_TYPES.LOADING_POST, payload: false });
+  }
+};
 
-        dispatch({ type: POST_TYPES.LOADING_POST, payload: false });
-    } catch (err) {
-        dispatch({
-          type: GLOBALTYPES.ALERT,
-          payload: {
-            error: err.response.data.msg,
-          },
-        });
-    }
-}
 
 
 export const updatePost = ({ content, images, auth, status }) => async (dispatch) => {
@@ -104,15 +106,15 @@ export const updatePost = ({ content, images, auth, status }) => async (dispatch
 
 
 export const likePost = ({ post, auth, socket }) => async (dispatch) => {
-  const newPost = {...post, likes: [...post.likes, auth.user]};
+  const newPost = { ...post, likes: [...post.likes, auth.user] };
 
-  dispatch({type: POST_TYPES.UPDATE_POST, payload: newPost});
+  dispatch({ type: POST_TYPES.UPDATE_POST, payload: newPost });
   socket.emit("likePost", newPost);
-  
+
   try {
     await patchDataAPI(`post/${post._id}/like`, null, auth.token);
 
-    // todo notification
+    // Notification message
     const msg = {
       id: auth.user._id,
       text: "Liked your post.",
@@ -124,14 +126,24 @@ export const likePost = ({ post, auth, socket }) => async (dispatch) => {
 
     dispatch(createNotify({ msg, auth, socket }));
   } catch (err) {
-    dispatch({
-      type: GLOBALTYPES.ALERT,
-      payload: {
-        error: err.response.data.msg,
-      },
-    });
+    if (err.response && err.response.data && err.response.data.msg) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: {
+          error: err.response.data.msg,
+        },
+      });
+    } else {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: {
+          error: "An error occurred while liking the post.",
+        },
+      });
+    }
   }
 };
+
 
 
 export const unLikePost = ({ post, auth, socket }) => async (dispatch) => {

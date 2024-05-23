@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataAPI } from "../../utils/fetchData";
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
-// import { Link } from "react-router-dom";
 import UserCard from "../UserCard";
 import LoadIcon from "../../images/loading.gif";
+import NotifyandMenu from "./NotifyandPro";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -39,25 +39,33 @@ const Search = () => {
 
   return (
     <form className="search_form" onSubmit={handleSearch}>
+      <div className="d-flex">
+
+      <NotifyandMenu/>
       <input
         type="text"
         title="Enter to Search"
         name="search"
         value={search}
         id="search"
+        className="w-full p-2 border border-gray-300 rounded-md"
+        style={{ fontSize: "1.2rem" }} // Adjust font size here
         onChange={(e) =>
           setSearch(e.target.value.toLowerCase().replace(/ /g, " "))
         }
       />
-      <div className="search_icon" style={{ opacity: search ? 0 : 0.3 }}>
+      <div
+        className="search_icon flex justify-start"
+        style={{ opacity: search ? 0 : 0.5 }}
+      >
         <span className="material-icons">search</span>
-        <span>Enter to Search</span>
+        <span className="text-25 ml-1">Enter to Search</span> {/* Adjust font size here */}
       </div>
 
       <div
         onClick={handleClose}
         className="close_search"
-        style={{ opacity: users.length === 0 ? 0 : 1 }}
+        style={{ opacity: users.length === 0 ? 0 : 1 , fontSize:"28px"}}
       >
         &times;
       </div>
@@ -68,7 +76,7 @@ const Search = () => {
 
       {load && <img className="loading" src={LoadIcon} alt="Loading" />}
 
-      <div className="users">
+      <div className="users" style={{marginTop:"60px"}}>
         {search &&
           users.map((user) => (
             <UserCard
@@ -78,6 +86,7 @@ const Search = () => {
               handleClose={handleClose}
             />
           ))}
+      </div>
       </div>
     </form>
   );

@@ -2,18 +2,18 @@ import React from "react";
 import Avatar from "../../Avatar";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import moment from "moment";
 import { BASE_URL } from '../../../utils/config'
 
 import { GLOBALTYPES } from "../../../redux/actions/globalTypes";
 import { deletePost, reportPost } from "../../../redux/actions/postAction";
-import { useState } from "react";
 
-const CardHeader = ({ post }) => {
+const SingleCardHeader = ({ post }) => {
   const { auth, socket } = useSelector((state) => state);
-  const [readMore, setReadMore] = useState();
   const dispatch = useDispatch();
   const history = useHistory();
+  const [readMore, setReadMore] = useState();
 
   const handleEditPost = () => {
     dispatch({ type: GLOBALTYPES.STATUS, payload: { ...post, onEdit: true } });
@@ -37,22 +37,27 @@ const CardHeader = ({ post }) => {
   };
 
   return (
+    <div>
+
     <div className="card_header">
       <div className="d-flex">
         <div className="outer-shadow big-avatar-cover me-2">
           <Avatar src={post.user.avatar} size="big-avatar" />
         </div>
         <div className="card_name">
-          <h6 className="m-0">
-            <Link className="text-dark" to={`/profile/${post.user._id}`}>
-              {post.user.username}
-            </Link>
-          </h6>
+        <h6 className="m-0">
+          <Link className="text-dark" to={`/profile/${post.user._id}`} style={{ textDecoration: 'none' }}>
+            {post.user.username}
+          </Link>
+        </h6>
+
           <small className="text-muted">
             {moment(post.createdAt).fromNow()}
           </small>
         </div>
       </div>
+      
+
 
       <div className="nav-item dropdown">
         <span
@@ -62,8 +67,6 @@ const CardHeader = ({ post }) => {
         >
           more_horiz
         </span>
-        
-        
 
         <div className="dropdown-menu">
           {auth.user._id === post.user._id && (
@@ -90,7 +93,23 @@ const CardHeader = ({ post }) => {
         </div>
       </div>
     </div>
+    <div>
+    <span style={{marginLeft:"30px"}}>
+          {post.content.length < 60
+            ? post.content
+            : readMore
+            ? post.content + " "
+            : post.content.slice(0, 60) + "  ..."}
+        </span>
+        {post.content.length > 60 && (
+          <span style={{marginLeft:"30px"}} className="readMore ml-3 text-blue-500 cursor-pointer hover:underline" onClick={() => setReadMore(!readMore)}>
+            {readMore ? "Hide Content" : "Read More"}
+          </span>
+        )}
+    </div>
+    </div>
+
   );
 };
 
-export default CardHeader;
+export default SingleCardHeader;

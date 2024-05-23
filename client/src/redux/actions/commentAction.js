@@ -42,8 +42,13 @@ export const createComment = ({post, newComment, auth, socket}) => async (dispat
 
       dispatch(createNotify({ msg, auth, socket }));
     } catch (err) {
-        dispatch({type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg}});
+      if (err.response && err.response.data && err.response.data.msg) {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } });
+      } else {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "An error occurred while creating a comment." } });
+      }
     }
+    
 };
 
 
@@ -57,9 +62,13 @@ export const updateComment = ({comment, post, content, auth}) => async (dispatch
     await patchDataAPI(`comment/${comment._id}`, { content }, auth.token);
 
   } catch (err) {
-    dispatch({type: GLOBALTYPES.ALERT, payload: {error: err.response.data.msg}});
+    if (err.response && err.response.data && err.response.data.msg) {
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } });
+    } else {
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "An error occurred while creating a comment." } });
+    }
   }
-};
+}  
 
 export const likeComment= ({comment, post, auth}) => async (dispatch) => {
     const newComment = {...comment, likes: [...comment.likes, auth.user]};

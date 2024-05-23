@@ -38,7 +38,7 @@ const Login = () => {
     <div className="auth_page">
       <form onSubmit={handleSubmit} className="inner-shadow">
         <h3 className="text-uppercase text-center mb-4 auth-heading ">
-          Campus Connect
+          Social App
         </h3>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
@@ -55,9 +55,9 @@ const Login = () => {
               name="email"
             />
           </div>
-          <div id="emailHelp" className="form-text">
+          {/* <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
-          </div>
+          </div> */}
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
