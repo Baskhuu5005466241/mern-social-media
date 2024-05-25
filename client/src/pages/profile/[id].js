@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LoadIcon  from "../../images/loading.gif";
 import { getProfileUsers } from "../../redux/actions/profileAction";
 import Saved from '../../components/profile/Saved';
-import InfoFollow from '../../components/profile/InfoFollow';
+// import InfoFollow from '../../components/profile/InfoFollow';
 
 const Profile = () => {
   const { profile, auth } = useSelector(state => state);

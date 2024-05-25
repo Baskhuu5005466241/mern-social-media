@@ -22,6 +22,11 @@
 
 
 /* #region Posts */
+.posts{
+    width: 90%;
+    height: 50%;
+}
+
 .posts .card{
     /* box-shadow: 0 0 5px #ddd; */
 }
@@ -60,7 +65,9 @@
     color: rgba(119, 33, 18, 0.733);
     font-weight: 700;
 }
-
+body {
+    background-color: #FFFFFF; /* white */
+}
 /* #endregion */
 
 

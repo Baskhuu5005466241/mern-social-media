@@ -12,7 +12,7 @@ const LeftMenu = () => {
     { label: "Message", icon: "near_me", path: "/message" },
     { label: "Discover", icon: "explore", path: "/discover" },
   ];
-
+// LEFTMENU MENU NOTIFYANDPRO
   const { auth, theme, notify } = useSelector((state) => state);
   const dispatch = useDispatch();
   const { pathname } = useLocation();

@@ -10,7 +10,7 @@ const Message = () => {
           <LeftMenu />
         </div> */}
 
-        <div className="col-md-3 px-0" style={{borderRight: '1px solid #ddd'}}>
+        <div className="col-md-4 px-0" style={{borderRight: '1px solid #ddd'}}>
           <LeftSide />
         </div>
 

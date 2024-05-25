@@ -37,5 +37,5 @@ const postSchema = new Schema(
   }
 );
 
-
+//postmodel
 module.exports = mongoose.model('post', postSchema);

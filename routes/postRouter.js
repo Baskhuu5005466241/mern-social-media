@@ -25,6 +25,8 @@ router.patch("/unSavePost/:id", auth, postCtrl.unSavePost);
 router.get("/getSavePosts", auth, postCtrl.getSavePost);
 
 
+//post
+
 
 
 module.exports = router;

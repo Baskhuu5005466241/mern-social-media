@@ -16,6 +16,9 @@
   --inner-shadow-0:inset 0 0 0 #d0d0d0 ,inset 0 0 0 #f8f8f8;
 }
 
+body {
+  background-color: #9c1111; /* white */
+}
 
 .outer-shadow{
     box-shadow: var(--outer-shadow);
