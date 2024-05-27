@@ -19,7 +19,7 @@ const Status = () => {
           style={{ marginLeft: "7px" }}
         >
           {/* Username without Link */}
-          <span style={{ textShadow: "var(--outer-shadow)", color:"black" }}>
+          <span id='whatsonyourmind' style={{ textShadow: "var(--outer-shadow)", color:"black" }} >
             {auth.user.username}, What's on your mind?
           </span>
         </button>

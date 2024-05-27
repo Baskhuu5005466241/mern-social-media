@@ -95,3 +95,16 @@
     background-position: center;
   }
   
+  .carousel-control-prev,
+.carousel-control-next {
+  filter: invert(0);
+  background-image: none;
+  border: none;
+  fill: black;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  color: rgb(25, 190, 83);
+  outline: none;
+}

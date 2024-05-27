@@ -421,72 +421,302 @@
 
 
 
-import React from "react";
+// import React from "react";
+// import { useSelector } from "react-redux";
+// import '../styles/msgcarousel.css'
+
+// const Carousel = ({ images, id }) => {
+//   const { theme } = useSelector(state => state);
+
+//   const isActive = index => {
+//     return index === 0 ? "active" : "";
+//   };
+
+//   return (
+//     <div id={`image${id}`} className="carousel slide" data-bs-ride="carousel">
+//       <div className="carousel-indicators">
+//         {images && Array.isArray(images) && images.map((img, index) => (
+//           <button
+//             key={index}
+//             type="button"
+//             data-bs-target={`#image${id}`}
+//             data-bs-slide-to={index}
+//             className={isActive(index)}
+//             aria-current={index === 0 ? "true" : undefined}
+//           />
+//         ))}
+//       </div>
+//       <div className="carousel-inner">
+//         {images && Array.isArray(images) && images.map((img, index) => (
+//           <div key={index} className={`carousel-item ${isActive(index)}`}>
+//             <div className="carousel-image-container">
+//               {img.url && img.url.match(/video/i) ? (
+//                 <video
+//                   controls
+//                   style={{ filter: theme ? "invert(1)" : "invert(0)" }} // Apply theme filter
+//                   className="d-block w-100 h-auto" // Set video to cover div
+//                   src={img.url}
+//                   alt={img.url}
+//                 />
+//               ) : (
+//                 <div className="image-background" style={{ backgroundImage: `url(${img.url})` }} />
+//               )}
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+
+//       <button
+//         style={{ width: "5%" }}
+//         className="carousel-control-prev"
+//         type="button"
+//         data-bs-target={`#image${id}`}
+//         data-bs-slide="prev"
+//       >
+//         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+//         <span className="visually-hidden">Previous</span>
+//       </button>
+//       <button
+//         style={{ width: "5%", color:"black" }}
+//         className="carousel-control-next"
+//         type="button"
+//         data-bs-target={`#image${id}`}
+//         data-bs-slide="next"
+//       >
+//         <span className="carousel-control-next-icon" aria-hidden="true"></span>
+//         <span className="visually-hidden">Next</span>
+//       </button>
+//     </div>
+//   );
+// };
+
+// export default Carousel;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // src/components/Carousel.js
+// import React, { useState } from "react";
+// import { useSelector } from "react-redux";
+// import MsgCarousel from "./MsgCarousel";
+// import '../styles/msgcarousel.css';
+
+// const Carousel = ({ images, id }) => {
+//   const { theme } = useSelector((state) => state);
+//   const [modalIsOpen, setModalIsOpen] = useState(false);
+//   const [startIndex, setStartIndex] = useState(0);
+
+//   const isActive = (index) => {
+//     return index === 0 ? "active" : "";
+//   };
+
+//   const openModal = (index) => {
+//     setStartIndex(index);
+//     setModalIsOpen(true);
+//   };
+
+//   const closeModal = () => {
+//     setModalIsOpen(false);
+//   };
+
+//   return (
+//     <>
+//       <div id={`image${id}`} className="carousel slide" data-bs-ride="carousel">
+//         <div className="carousel-indicators">
+//           {images && Array.isArray(images) && images.map((img, index) => (
+//             <button
+//               key={index}
+//               type="button"
+//               data-bs-target={`#image${id}`}
+//               data-bs-slide-to={index}
+//               className={isActive(index)}
+//               aria-current={index === 0 ? "true" : undefined}
+//             />
+//           ))}
+//         </div>
+//         <div className="carousel-inner">
+//           {images && Array.isArray(images) && images.map((img, index) => (
+//             <div key={index} className={`carousel-item ${isActive(index)}`}>
+//               <div className="carousel-image-container" onClick={() => openModal(index)}>
+//                 {img.url && img.url.match(/video/i) ? (
+//                   <video
+//                     controls
+//                     style={{ filter: theme ? "invert(1)" : "invert(0)" }}
+//                     className="d-block w-100 h-auto"
+//                     src={img.url}
+//                     alt={img.url}
+//                   />
+//                 ) : (
+//                   <div className="image-background" style={{ backgroundImage: `url(${img.url})` }} />
+//                 )}
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+
+//         <button
+//           style={{ width: "5%" }}
+//           className="carousel-control-prev"
+//           type="button"
+//           data-bs-target={`#image${id}`}
+//           data-bs-slide="prev"
+//         >
+//           <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+//           <span className="visually-hidden">Previous</span>
+//         </button>
+//         <button
+//           style={{ width: "5%", color: "black" }}
+//           className="carousel-control-next"
+//           type="button"
+//           data-bs-target={`#image${id}`}
+//           data-bs-slide="next"
+//         >
+//           <span className="carousel-control-next-icon" aria-hidden="true"></span>
+//           <span className="visually-hidden">Next</span>
+//         </button>
+//       </div>
+
+//       {modalIsOpen && (
+//         <MsgCarousel
+//           items={images}
+//           startIndex={startIndex}
+//           onClose={closeModal}
+//         />
+//       )}
+//     </>
+//   );
+// };
+
+// export default Carousel;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import '../styles/msgcarousel.css'
+import MsgCarousel from "./MsgCarousel";
+import '../styles/msgcarousel.css';
 
 const Carousel = ({ images, id }) => {
-  const { theme } = useSelector(state => state);
+  const { theme } = useSelector((state) => state);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [startIndex, setStartIndex] = useState(0);
 
-  const isActive = index => {
+  const isActive = (index) => {
     return index === 0 ? "active" : "";
   };
 
+  const openModal = (index) => {
+    setStartIndex(index);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    <div id={`image${id}`} className="carousel slide" data-bs-ride="carousel">
-      <div className="carousel-indicators">
-        {images && Array.isArray(images) && images.map((img, index) => (
-          <button
-            key={index}
-            type="button"
-            data-bs-target={`#image${id}`}
-            data-bs-slide-to={index}
-            className={isActive(index)}
-            aria-current={index === 0 ? "true" : undefined}
-          />
-        ))}
-      </div>
-      <div className="carousel-inner">
-        {images && Array.isArray(images) && images.map((img, index) => (
-          <div key={index} className={`carousel-item ${isActive(index)}`}>
-            <div className="carousel-image-container">
-              {img.url && img.url.match(/video/i) ? (
-                <video
-                  controls
-                  style={{ filter: theme ? "invert(1)" : "invert(0)" }} // Apply theme filter
-                  className="d-block w-100 h-auto" // Set video to cover div
-                  src={img.url}
-                  alt={img.url}
-                />
-              ) : (
-                <div className="image-background" style={{ backgroundImage: `url(${img.url})` }} />
-              )}
+    <>
+      <div id={`image${id}`} className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-indicators">
+          {images && Array.isArray(images) && images.map((img, index) => (
+            <button
+              key={index}
+              type="button"
+              data-bs-target={`#image${id}`}
+              data-bs-slide-to={index}
+              className={isActive(index)}
+              aria-current={index === 0 ? "true" : undefined}
+            />
+          ))}
+        </div>
+        <div className="carousel-inner">
+          {images && Array.isArray(images) && images.map((img, index) => (
+            <div key={index} className={`carousel-item ${isActive(index)}`}>
+              <div className="carousel-image-container" onClick={() => openModal(index)}>
+                {img.url && img.url.match(/video/i) ? (
+                  <video
+                    controls
+                    style={{ filter: theme ? "invert(1)" : "invert(0)" }}
+                    className="d-block w-100 h-auto"
+                    src={img.url}
+                    alt={img.url}
+                  />
+                ) : (
+                  <div className="image-background" style={{ backgroundImage: `url(${img.url})` }} />
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {images.length > 1 && (
+          <>
+            <button
+              style={{ width: "5%" }}
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target={`#image${id}`}
+              data-bs-slide="prev"
+            >
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              style={{ width: "5%", color: "black" }}
+              className="carousel-control-next"
+              type="button"
+              data-bs-target={`#image${id}`}
+              data-bs-slide="next"
+            >
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </>
+        )}
       </div>
 
-      <button
-        style={{ width: "5%" }}
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target={`#image${id}`}
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        style={{ width: "5%", color:"black" }}
-        className="carousel-control-next"
-        type="button"
-        data-bs-target={`#image${id}`}
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
+      {modalIsOpen && (
+        <MsgCarousel
+          items={images}
+          startIndex={startIndex}
+          onClose={closeModal}
+        />
+      )}
+    </>
   );
 };
 

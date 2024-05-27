@@ -1,10 +1,12 @@
+
+
 // import React, { useState, useEffect} from 'react'
 // import CommentDisplay from './comments/CommentDisplay'
 
-// const Comments = ({post}) => {
+// const SingleComments = ({post}) => {
 //   const [comments, setComments] = useState([]);
 //   const [showComments, setShowComments] = useState([]);
-//   const [next, setNext] = useState(2);
+//   const [next, setNext] = useState(5);
 //   const [replyComments, setReplyComments] = useState([]);
 
 
@@ -35,7 +37,7 @@
 //             className="p-2 border-top"
 //             style={{ cursor: "pointer", color: "crimson" }}
 //           >
-//             Load more...
+//             View all comments
 //           </div>
 //         ) : (
 //           comments.length > 2 && (
@@ -48,11 +50,12 @@
 //             </div>
 //           )
 //         )}
+        
 //       </div>
 //     );
 // }
 
-// export default Comments
+// export default SingleComments
 
 
 
@@ -70,59 +73,67 @@
 
 
 
-import React, { useState, useEffect} from 'react'
-import CommentDisplay from './comments/CommentDisplay'
 
-const Comments = ({post}) => {
+import React, { useState, useEffect } from 'react';
+import CommentDisplay from './comments/CommentDisplay';
+
+const SingleComments = ({ post }) => {
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState([]);
-  const [next, setNext] = useState(1);
+  const [showAll, setShowAll] = useState(true); // State to determine whether to show all comments
   const [replyComments, setReplyComments] = useState([]);
-
 
   useEffect(() => {
     const newCm = post.comments.filter((cm) => !cm.reply);
     setComments(newCm);
-    setShowComments(newCm.slice(newCm.length - next));
-  }, [post.comments, next]);
+    setShowComments(newCm); // Initially show all comments
+  }, [post.comments]);
 
   useEffect(() => {
     const newReply = post.comments.filter((cm) => cm.reply);
     setReplyComments(newReply);
   }, [post.comments]);
 
-    return (
-      <div className="comments">
-        {showComments.map((comment, index) => (
-          <CommentDisplay
-            key={index}
-            comment={comment}
-            post={post}
-            replyCm={replyComments.filter((item) => item.reply === comment._id)}
-          />
-        ))}
-        {comments.length - next > 0 ? (
-          <div
-            onClick={() => setNext(next + 10)}
-            className="p-2 border-top"
-            style={{ cursor: "pointer", color: "crimson" }}
-          >
-            View all comments
-          </div>
-        ) : (
-          comments.length > 1 && (
-            <div
-              onClick={() => setNext(1)}
-              className="p-2 border-top"
-              style={{ cursor: "pointer", color: "crimson" }}
-            >
-              Hide...
-            </div>
-          )
-        )}
-        
-      </div>
-    );
-}
+  const handleHide = () => {
+    setShowAll(false);
+    setShowComments(comments.slice(0, 3)); // Show only the first three comments
+  };
 
-export default Comments
+  const handleShowAll = () => {
+    setShowAll(true);
+    setShowComments(comments); // Show all comments
+  };
+
+  return (
+    <div className="comments">
+      {showComments.map((comment, index) => (
+        <CommentDisplay
+          key={index}
+          comment={comment}
+          post={post}
+          replyCm={replyComments.filter((item) => item.reply === comment._id)}
+        />
+      ))}
+      {/* {showAll && comments.length > 3 && (
+        <div
+          onClick={handleHide}
+          className="p-2 border-top"
+          style={{ cursor: 'pointer', color: 'crimson' }}
+        >
+          Hide...
+        </div>
+      )}
+      {!showAll && (
+        <div
+          onClick={handleShowAll}
+          className="p-2 border-top"
+          style={{ cursor: 'pointer', color: 'crimson' }}
+        >
+          View all comments
+        </div>
+      )} */}
+    </div>
+  );
+};
+
+export default SingleComments;

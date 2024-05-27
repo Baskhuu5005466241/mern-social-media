@@ -140,7 +140,7 @@ const Home = () => {
 
   return (
     <div className="home w-[500px] br-72 row mx-0 justify-stretch">
-      <div className="col-md-2">
+      <div className="col-md-2" id='rightsidebarlol'>
         <RightSideBar />
       </div>
       <div className="col-md-6 offset-md-2"> {/* Added offset-md-1 to shift the div to the right */}

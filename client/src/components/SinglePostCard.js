@@ -37,6 +37,53 @@
 
 
 
+// import '../styles/singlepostcard.css'
+// import React from 'react';
+// import CardBody from "./home/post_card/CardBody";
+// import CardFooter from "./home/post_card/CardFooter";
+// import CardHeader from "./home/post_card/CardHeader";
+// import Comments from './home/Comments';
+// import InputComment from "./home/InputComment";
+// import SingleCardHeader from './home/post_card/SingleCardHeader';
+// import SingleCardBody from './home/post_card/SingleCardBody';
+// import SingleCardFooter from './home/post_card/SingleCardFooter';
+
+// const SinglePostCard = ({ post, theme }) => {
+//   return (
+//     <div className='d-flex justify-content-center align-items-start'>
+//       <div className="card my-3 outer-shadow" style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', flex: '1' }}>
+//         <SingleCardBody post={post} theme={theme} />
+//       </div>
+//       <div className="comments-container" style={{ maxWidth: '600px', overflowY: 'auto', flex: '1', display: 'flex', flexDirection: 'column' }}>
+//         <SingleCardHeader post={post} />
+//         <div className="comments-scroll" style={{ flex: '1', overflowY: 'auto' }}>
+//           <Comments post={post} />
+//         </div>
+//         <SingleCardFooter post={post} />
+//         <InputComment post={post} />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default SinglePostCard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/components/SinglePostCard.js
 import '../styles/singlepostcard.css'
 import React from 'react';
 import CardBody from "./home/post_card/CardBody";
@@ -47,17 +94,18 @@ import InputComment from "./home/InputComment";
 import SingleCardHeader from './home/post_card/SingleCardHeader';
 import SingleCardBody from './home/post_card/SingleCardBody';
 import SingleCardFooter from './home/post_card/SingleCardFooter';
+import SingleComments from './home/SingleComments';
 
 const SinglePostCard = ({ post, theme }) => {
   return (
-    <div className='d-flex justify-content-center align-items-start'>
-      <div className="card my-3 outer-shadow" style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', flex: '1' }}>
+    <div className="single-post-card-container">
+      <div className="card-container outer-shadow">
         <SingleCardBody post={post} theme={theme} />
       </div>
-      <div className="comments-container" style={{ maxWidth: '600px', overflowY: 'auto', flex: '1', display: 'flex', flexDirection: 'column' }}>
+      <div className="comments-container">
         <SingleCardHeader post={post} />
-        <div className="comments-scroll" style={{ flex: '1', overflowY: 'auto' }}>
-          <Comments post={post} />
+        <div className="comments-scroll">
+          <SingleComments post={post} />
         </div>
         <SingleCardFooter post={post} />
         <InputComment post={post} />

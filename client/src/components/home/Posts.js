@@ -20,10 +20,12 @@ const Posts = () => {
     setLoad(false);
   };
   return (
-    <div className="posts">
+    <div className="posts" id="postslol">
       {homePosts.posts.map((post) => (
         <PostCard key={post._id} post={post} theme={theme} />
       ))}
+
+
 
       {load && (
         <img src={LoadIcon} alt="Loading..." className="d-block mx-auto" />

@@ -138,12 +138,12 @@ const StatusModal = () => {
               background: theme ? "rgb(0,0,0,0.3)" : "",
             }}
           />
-
+  
           <div className="d-flex">
             <div className="flex-fill"></div>
             <Icons setContent={setContent} content={content} theme={theme} />
           </div>
-
+  
           <div className="show_images">
             {images.map((img, index) => (
               <div key={index} className="file_img">
@@ -166,7 +166,7 @@ const StatusModal = () => {
               </div>
             ))}
           </div>
-
+  
           {stream && (
             <div className="stream position-relative">
               <video
@@ -177,18 +177,18 @@ const StatusModal = () => {
                 autoPlay
                 muted
               />
-
+  
               <span onClick={handleStopStream}>&times;</span>
               <canvas style={{ display: "none" }} ref={refCanvas} />
             </div>
           )}
-
+  
           <div className="input_images">
             {stream ? (
-              <i className="fas fa-camera" onClick={handleCapture} />
+              <i className="fas fa-camera hidden" onClick={handleCapture} />
             ) : (
               <>
-                <i className="fas fa-camera" onClick={handleStream} />
+                {/* <i className="fas fa-camera hidden" onClick={handleStream} /> */}
                 <div className="file_upload">
                   <i className="fas fa-image" />
                   <input
@@ -212,6 +212,7 @@ const StatusModal = () => {
       </form>
     </div>
   );
-};
-
-export default StatusModal;
+  };
+  
+  export default StatusModal;
+  

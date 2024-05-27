@@ -60,7 +60,7 @@ const EditProfile = ({ setOnEdit }) => {
             style={{ filter: theme ? "invert(1)" : "invert(0)" }}
           />
           <span>
-            <i className="fas fa-camera" />
+            <i className="fas fa-camera hidden" />
             <p>Change</p>
             <input
               type="file"

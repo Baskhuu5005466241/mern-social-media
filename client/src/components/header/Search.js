@@ -44,7 +44,7 @@ const Search = () => {
       <NotifyandMenu/>
       <input
         type="text"
-        title="Enter to Search"
+        title="Search Here"
         name="search"
         value={search}
         id="search"
@@ -58,8 +58,8 @@ const Search = () => {
         className="search_icon flex justify-start"
         style={{ opacity: search ? 0 : 0.5 }}
       >
-        <span className="material-icons">search</span>
-        <span className="text-25 ml-1">Enter to Search</span> {/* Adjust font size here */}
+        <span className="material-icons" id="usersearchlol">search</span>
+        <span className="text-50 ml-1" id="usersearchherelol">Search Here</span> {/* Adjust font size here */}
       </div>
 
       <div

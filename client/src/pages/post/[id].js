@@ -21,7 +21,7 @@ const Post = () => {
     }, [detailPost, dispatch, id, auth]);
 
     return (
-        <div className="posts lol">
+        <div className="posts lol" style={{width:"100%", height:"100vh"}}>
             {
                 post.length === 0 &&
                 <img src={LoadIcon} alt="Loading..." className="d-block mx-auto my-4" />

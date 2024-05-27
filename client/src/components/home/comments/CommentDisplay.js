@@ -30,7 +30,7 @@ const CommentDisplay = ({ comment, post, replyCm }) => {
               onClick={() => setNext(next + 10)}
               style={{ cursor: "pointer", color: "crimson" }}
             >
-              Load more...
+              Load more reply...
             </div>
           ) : (
             replyCm.length > 1 && (
@@ -38,7 +38,7 @@ const CommentDisplay = ({ comment, post, replyCm }) => {
                 onClick={() => setNext(1)}
                 style={{ cursor: "pointer", color: "crimson" }}
               >
-                Hide...
+                Hide reply...
               </div>
             )
           )}
